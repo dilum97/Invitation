@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wedding Invitation – Dilum & Thilini</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel+Decorative:wght@400;700&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #D4AF37;
+    --gold-light: #F5D76E;
+    --gold-pale: #FFF8E7;
+    --purple-deep: #2D0A4E;
+    --purple-mid: #4B1A7C;
+    --purple-light: #7B3FA0;
+    --cream: #FDF6E3;
+    --text-main: #1A0A2E;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    background: var(--purple-deep);
+    color: var(--cream);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* BACKGROUND */
+  .bg-wrap {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+  }
+  .bg-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+  .bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      160deg,
+      rgba(20,4,50,0.88) 0%,
+      rgba(45,10,78,0.82) 40%,
+      rgba(20,4,50,0.90) 100%
+    );
+  }
+
+  /* PARTICLES */
+  #particles {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0;
+    animation: float-up linear infinite;
+  }
+  @keyframes float-up {
+    0%   { transform: translateY(0) scale(1);   opacity: 0; }
+    10%  { opacity: 0.6; }
+    90%  { opacity: 0.2; }
+    100% { transform: translateY(-100vh) scale(0.3); opacity: 0; }
+  }
+
+  /* MAIN CONTENT */
+  .page {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem 4rem;
+  }
+
+  /* GOLD BORDER FRAME */
+  .frame {
+    width: 100%;
+    max-width: 640px;
+    border: 1.5px solid var(--gold);
+    border-radius: 4px;
+    padding: 0.4rem;
+    background: rgba(212,175,55,0.05);
+    position: relative;
+  }
+  .frame::before {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    border: 0.5px solid rgba(212,175,55,0.35);
+    border-radius: 2px;
+    pointer-events: none;
+  }
+
+  /* CORNER ORNAMENTS */
+  .corner {
+    position: absolute;
+    width: 28px; height: 28px;
+    opacity: 0.8;
+  }
+  .corner svg { width: 100%; height: 100%; }
+  .corner.tl { top: 8px; left: 8px; }
+  .corner.tr { top: 8px; right: 8px; transform: scaleX(-1); }
+  .corner.bl { bottom: 8px; left: 8px; transform: scaleY(-1); }
+  .corner.br { bottom: 8px; right: 8px; transform: scale(-1,-1); }
+
+  .inner {
+    padding: 2.5rem 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    text-align: center;
+  }
+
+  /* TOP ORNAMENT */
+  .lotus-top {
+    margin-bottom: 0.8rem;
+  }
+  .lotus-top svg {
+    width: 80px; height: 40px;
+    filter: drop-shadow(0 0 6px rgba(212,175,55,0.5));
+  }
+
+  /* AUSPICIOUS HEADER */
+  .auspicious {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(0.7rem, 2.5vw, 0.85rem);
+    letter-spacing: 0.22em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+    animation: glow-pulse 3s ease-in-out infinite;
+  }
+  @keyframes glow-pulse {
+    0%,100% { text-shadow: 0 0 8px rgba(212,175,55,0.4); }
+    50%      { text-shadow: 0 0 20px rgba(212,175,55,0.9), 0 0 40px rgba(212,175,55,0.3); }
+  }
+
+  .divider {
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    margin: 0.6rem auto;
+    opacity: 0.7;
+  }
+
+  /* PARENTS */
+  .parents-block {
+    font-size: clamp(0.85rem, 2.8vw, 1rem);
+    color: rgba(253,246,227,0.80);
+    line-height: 1.8;
+    font-style: italic;
+    letter-spacing: 0.03em;
+  }
+  .parents-block strong {
+    color: var(--cream);
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  /* CONNECTOR */
+  .connector {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(0.65rem, 2vw, 0.78rem);
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    margin: 0.5rem 0;
+  }
+
+  /* COUPLE NAMES */
+  .couple-names {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    margin: 0.5rem 0;
+  }
+  .name {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.6rem, 6vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+    background: linear-gradient(135deg, #D4AF37, #F5D76E, #D4AF37, #B8972A);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 2px 8px rgba(212,175,55,0.3));
+  }
+  .ampersand {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: clamp(2rem, 7vw, 3.2rem);
+    font-style: italic;
+    color: var(--gold-light);
+    opacity: 0.7;
+    line-height: 1;
+  }
+
+  /* CEREMONY TAG */
+  .ceremony-tag {
+    font-size: clamp(0.7rem, 2.2vw, 0.82rem);
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin: 0.3rem 0;
+  }
+
+  /* DATE BADGE */
+  .date-badge {
+    background: rgba(212,175,55,0.1);
+    border: 1px solid rgba(212,175,55,0.4);
+    border-radius: 2px;
+    padding: 0.6rem 2rem;
+    margin: 0.6rem 0;
+  }
+  .date-badge .day-name {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(0.65rem, 2vw, 0.78rem);
+    letter-spacing: 0.2em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+  }
+  .date-badge .date-num {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.4rem, 5vw, 2rem);
+    color: var(--gold);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+  }
+  .date-badge .month-year {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+    color: var(--cream);
+    letter-spacing: 0.12em;
+  }
+
+  /* TIME */
+  .time-block {
+    font-size: clamp(0.85rem, 2.8vw, 1rem);
+    color: rgba(253,246,227,0.85);
+    line-height: 2;
+    letter-spacing: 0.05em;
+  }
+  .time-block em {
+    color: var(--gold-light);
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  /* VENUE */
+  .venue-name {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1rem, 3.5vw, 1.3rem);
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    line-height: 1.4;
+    margin-top: 0.4rem;
+  }
+
+  /* INVITATION TEXT */
+  .invite-text {
+    font-size: clamp(0.88rem, 2.8vw, 1.02rem);
+    font-style: italic;
+    color: rgba(253,246,227,0.82);
+    line-height: 1.8;
+    max-width: 440px;
+    margin: 0.4rem auto;
+  }
+
+  /* CONTACT */
+  .contact-block {
+    font-size: clamp(0.78rem, 2.5vw, 0.9rem);
+    color: rgba(253,246,227,0.65);
+    letter-spacing: 0.05em;
+    margin-top: 0.2rem;
+  }
+  .contact-block a {
+    color: var(--gold-light);
+    text-decoration: none;
+  }
+
+  /* SECTION CARDS */
+  .section-card {
+    width: 100%;
+    max-width: 640px;
+    background: rgba(20,4,50,0.7);
+    border: 1px solid rgba(212,175,55,0.25);
+    border-radius: 4px;
+    padding: 2rem 1.5rem;
+    margin-top: 1.5rem;
+    text-align: center;
+    backdrop-filter: blur(6px);
+  }
+
+  .section-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(0.75rem, 2.5vw, 0.9rem);
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+  }
+
+  /* CALENDAR */
+  .calendar {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  .cal-header {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    margin-bottom: 0.8rem;
+  }
+  .cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 3px;
+    text-align: center;
+  }
+  .cal-day-label {
+    font-size: clamp(0.6rem, 2vw, 0.72rem);
+    color: rgba(212,175,55,0.6);
+    letter-spacing: 0.05em;
+    padding: 2px 0;
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .cal-cell {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(0.75rem, 2.5vw, 0.9rem);
+    color: rgba(253,246,227,0.7);
+    padding: 5px 2px;
+    border-radius: 2px;
+    line-height: 1.4;
+  }
+  .cal-cell.empty { opacity: 0; }
+  .cal-cell.today { color: rgba(253,246,227,0.4); }
+  .cal-cell.highlight {
+    background: linear-gradient(135deg, #D4AF37, #F5D76E);
+    color: var(--purple-deep) !important;
+    font-weight: 700;
+    border-radius: 50%;
+    width: 30px; height: 30px;
+    display: flex; align-items: center; justify-content: center;
+    margin: auto;
+    font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+    box-shadow: 0 0 12px rgba(212,175,55,0.7), 0 0 24px rgba(212,175,55,0.3);
+    animation: glow-pulse 2.5s ease-in-out infinite;
+  }
+
+  /* COUNTDOWN */
+  .countdown-grid {
+    display: flex;
+    justify-content: center;
+    gap: clamp(0.6rem, 3vw, 1.5rem);
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+  .count-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  .count-num {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.8rem, 7vw, 2.8rem);
+    font-weight: 700;
+    background: linear-gradient(135deg, #D4AF37, #F5D76E);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    min-width: 2.5ch;
+    text-align: center;
+    filter: drop-shadow(0 0 8px rgba(212,175,55,0.5));
+  }
+  .count-label {
+    font-size: clamp(0.55rem, 1.8vw, 0.68rem);
+    letter-spacing: 0.2em;
+    color: rgba(212,175,55,0.7);
+    text-transform: uppercase;
+  }
+  .count-sep {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.4rem, 5vw, 2rem);
+    color: rgba(212,175,55,0.3);
+    align-self: flex-start;
+    margin-top: 0.2rem;
+    line-height: 1.2;
+  }
+
+  /* MAP BUTTON */
+  .map-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #D4AF37, #B8972A);
+    color: var(--purple-deep);
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(0.65rem, 2.2vw, 0.78rem);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.75rem 2rem;
+    border-radius: 2px;
+    margin-top: 0.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(212,175,55,0.4), 0 0 40px rgba(212,175,55,0.15);
+    animation: btn-glow 2.5s ease-in-out infinite;
+  }
+  @keyframes btn-glow {
+    0%,100% { box-shadow: 0 0 16px rgba(212,175,55,0.4), 0 0 32px rgba(212,175,55,0.15); }
+    50%      { box-shadow: 0 0 28px rgba(212,175,55,0.7), 0 0 56px rgba(212,175,55,0.3); }
+  }
+  .map-btn:hover {
+    background: linear-gradient(135deg, #F5D76E, #D4AF37);
+    transform: translateY(-2px);
+  }
+  .map-btn svg {
+    width: 14px; height: 14px;
+    flex-shrink: 0;
+  }
+
+  /* FADE-IN ANIMATIONS */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .fade-in:nth-child(2) { transition-delay: 0.1s; }
+  .fade-in:nth-child(3) { transition-delay: 0.2s; }
+  .fade-in:nth-child(4) { transition-delay: 0.3s; }
+
+  /* BOTTOM ORNAMENT */
+  .ornament-bottom {
+    margin-top: 1rem;
+    opacity: 0.6;
+  }
+  .ornament-bottom svg {
+    width: 120px; height: 20px;
+  }
+
+  /* FOOTER */
+  .footer {
+    width: 100%; max-width: 640px;
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.7rem;
+    color: rgba(212,175,55,0.35);
+    letter-spacing: 0.1em;
+  }
+
+  @media (max-width: 400px) {
+    .inner { padding: 2rem 1rem 1.5rem; }
+    .section-card { padding: 1.5rem 1rem; }
+    .date-badge { padding: 0.5rem 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- BACKGROUND -->
+<div class="bg-wrap">
+  <img src="invite.jpg" alt="Wedding background" onerror="this.style.display='none'">
+  <div class="bg-overlay"></div>
+</div>
+
+<!-- FLOATING PARTICLES -->
+<div id="particles"></div>
+
+<!-- PAGE -->
+<main class="page">
+
+  <!-- INVITATION FRAME -->
+  <div class="frame fade-in">
+    <!-- Corner ornaments -->
+    <div class="corner tl">
+      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 26 L2 4 Q2 2 4 2 L26 2" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <path d="M6 2 Q14 2 14 10" stroke="#D4AF37" stroke-width="0.8" fill="none" opacity="0.5"/>
+        <path d="M2 6 Q2 14 10 14" stroke="#D4AF37" stroke-width="0.8" fill="none" opacity="0.5"/>
+        <circle cx="4" cy="4" r="1.5" fill="#D4AF37"/>
+      </svg>
+    </div>
+    <div class="corner tr">
+      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 26 L2 4 Q2 2 4 2 L26 2" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <path d="M6 2 Q14 2 14 10" stroke="#D4AF37" stroke-width="0.8" fill="none" opacity="0.5"/>
+        <path d="M2 6 Q2 14 10 14" stroke="#D4AF37" stroke-width="0.8" fill="none" opacity="0.5"/>
+        <circle cx="4" cy="4" r="1.5" fill="#D4AF37"/>
+      </svg>
+    </div>
+    <div class="corner bl">
+      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 26 L2 4 Q2 2 4 2 L26 2" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <path d="M6 2 Q14 2 14 10" stroke="#D4AF37" stroke-width="0.8" fill="none" opacity="0.5"/>
+        <path d="M2 6 Q2 14 10 14" stroke="#D4AF37" stroke-width="0.8" fill="none" opacity="0.5"/>
+        <circle cx="4" cy="4" r="1.5" fill="#D4AF37"/>
+      </svg>
+    </div>
+    <div class="corner br">
+      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 26 L2 4 Q2 2 4 2 L26 2" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <path d="M6 2 Q14 2 14 10" stroke="#D4AF37" stroke-width="0.8" fill="none" opacity="0.5"/>
+        <path d="M2 6 Q2 14 10 14" stroke="#D4AF37" stroke-width="0.8" fill="none" opacity="0.5"/>
+        <circle cx="4" cy="4" r="1.5" fill="#D4AF37"/>
+      </svg>
+    </div>
+
+    <div class="inner">
+      <!-- Lotus ornament -->
+      <div class="lotus-top">
+        <svg viewBox="0 0 120 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Lotus petals -->
+          <ellipse cx="60" cy="38" rx="8" ry="18" fill="rgba(212,175,55,0.15)" stroke="#D4AF37" stroke-width="0.8"/>
+          <ellipse cx="45" cy="42" rx="7" ry="15" fill="rgba(212,175,55,0.10)" stroke="#D4AF37" stroke-width="0.7" transform="rotate(-20,45,42)"/>
+          <ellipse cx="75" cy="42" rx="7" ry="15" fill="rgba(212,175,55,0.10)" stroke="#D4AF37" stroke-width="0.7" transform="rotate(20,75,42)"/>
+          <ellipse cx="32" cy="46" rx="6" ry="13" fill="rgba(212,175,55,0.07)" stroke="#D4AF37" stroke-width="0.6" transform="rotate(-38,32,46)"/>
+          <ellipse cx="88" cy="46" rx="6" ry="13" fill="rgba(212,175,55,0.07)" stroke="#D4AF37" stroke-width="0.6" transform="rotate(38,88,46)"/>
+          <!-- Stem -->
+          <path d="M60 55 Q60 48 60 38" stroke="#D4AF37" stroke-width="0.8" fill="none"/>
+          <!-- Side branches -->
+          <path d="M60 48 Q50 44 40 48" stroke="#D4AF37" stroke-width="0.5" fill="none" opacity="0.6"/>
+          <path d="M60 48 Q70 44 80 48" stroke="#D4AF37" stroke-width="0.5" fill="none" opacity="0.6"/>
+          <!-- Center dot -->
+          <circle cx="60" cy="22" r="3" fill="#D4AF37" opacity="0.7"/>
+        </svg>
+      </div>
+
+      <!-- Auspicious Opening -->
+      <p class="auspicious">Sri Shubha Mangalam</p>
+      <div class="divider"></div>
+
+      <!-- Parents Block -->
+      <p class="parents-block">
+        The beloved son of<br>
+        <strong>Mr. & Mrs. Asoka Sudusingha</strong>
+      </p>
+
+      <!-- Groom Name -->
+      <div style="margin: 0.4rem 0;">
+        <div class="name" style="font-size: clamp(2rem, 7.5vw, 3.2rem);">Dilum</div>
+      </div>
+
+      <p class="connector">— is to be united in sacred matrimony with —</p>
+
+      <!-- Bride Name -->
+      <div style="margin: 0.4rem 0;">
+        <div class="name" style="font-size: clamp(2rem, 7.5vw, 3.2rem);">Thilini</div>
+      </div>
+
+      <!-- Parents Block 2 -->
+      <p class="parents-block" style="margin-top: 0.4rem;">
+        The cherished daughter of<br>
+        <strong>Mr. & Mrs. M.H. Premathilaka</strong>
+      </p>
+
+      <div class="divider"></div>
+
+      <!-- Date Badge -->
+      <div class="date-badge">
+        <div class="day-name">Thursday</div>
+        <div class="date-num">4</div>
+        <div class="month-year">June · 2026</div>
+      </div>
+
+      <!-- Time -->
+      <div class="time-block" style="margin-top: 0.6rem;">
+        <em>8.00 a.m. — 4.00 p.m.</em><br>
+        <span style="font-size: clamp(0.75rem,2.3vw,0.88rem); color: rgba(212,175,55,0.8);">(Poruwa Ceremony at 10.00 a.m.)</span>
+      </div>
+
+      <div class="divider" style="margin-top: 0.8rem;"></div>
+
+      <!-- Venue -->
+      <p class="ceremony-tag">Venue</p>
+      <div class="venue-name">Golden Rose<br>Banquet Hall</div>
+
+      <div class="divider" style="margin-top: 0.8rem;"></div>
+
+      <!-- Invite Text -->
+      <p class="invite-text">
+        We joyfully request the honour of your gracious presence<br>
+        to celebrate this most auspicious union.
+      </p>
+
+      <!-- Contact -->
+      <p class="contact-block" style="margin-top: 0.8rem;">
+        <a href="tel:0789911314">078 991 1314</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="tel:0713414630">071 341 4630</a>
+      </p>
+
+      <!-- Bottom ornament -->
+      <div class="ornament-bottom">
+        <svg viewBox="0 0 160 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="0" y1="10" x2="62" y2="10" stroke="#D4AF37" stroke-width="0.5" opacity="0.5"/>
+          <circle cx="70" cy="10" r="3" stroke="#D4AF37" stroke-width="0.8" fill="rgba(212,175,55,0.15)"/>
+          <circle cx="80" cy="10" r="5" stroke="#D4AF37" stroke-width="0.8" fill="rgba(212,175,55,0.1)"/>
+          <circle cx="90" cy="10" r="3" stroke="#D4AF37" stroke-width="0.8" fill="rgba(212,175,55,0.15)"/>
+          <line x1="98" y1="10" x2="160" y2="10" stroke="#D4AF37" stroke-width="0.5" opacity="0.5"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- COUNTDOWN -->
+  <div class="section-card fade-in">
+    <p class="section-title">Counting Down to the Celebration</p>
+    <div class="countdown-grid">
+      <div class="count-unit">
+        <div class="count-num" id="cd-days">00</div>
+        <div class="count-label">Days</div>
+      </div>
+      <div class="count-sep">:</div>
+      <div class="count-unit">
+        <div class="count-num" id="cd-hours">00</div>
+        <div class="count-label">Hours</div>
+      </div>
+      <div class="count-sep">:</div>
+      <div class="count-unit">
+        <div class="count-num" id="cd-mins">00</div>
+        <div class="count-label">Minutes</div>
+      </div>
+      <div class="count-sep">:</div>
+      <div class="count-unit">
+        <div class="count-num" id="cd-secs">00</div>
+        <div class="count-label">Seconds</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CALENDAR -->
+  <div class="section-card fade-in">
+    <p class="section-title">Wedding Date</p>
+    <div class="calendar">
+      <div class="cal-header">June 2026</div>
+      <div class="cal-grid" id="calendar-grid"></div>
+    </div>
+  </div>
+
+  <!-- LOCATION -->
+  <div class="section-card fade-in">
+    <p class="section-title">Venue Location</p>
+    <p style="font-size: clamp(0.85rem,2.8vw,1rem); color: rgba(253,246,227,0.75); margin-bottom: 1rem; font-style: italic;">Golden Rose Banquet Hall</p>
+    <a href="https://maps.app.goo.gl/bYXpzadK8kzJ4KHY7" target="_blank" rel="noopener" class="map-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+      </svg>
+      Tap to See Location
+    </a>
+  </div>
+
+  <p class="footer">Dilum &amp; Thilini · 4th June 2026 · With Love</p>
+
+</main>
+
+<script>
+  // PARTICLES
+  (function() {
+    const container = document.getElementById('particles');
+    const count = 28;
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const size = Math.random() * 3 + 1;
+      p.style.cssText = [
+        `width:${size}px`, `height:${size}px`,
+        `left:${Math.random()*100}%`,
+        `top:${Math.random()*100}%`,
+        `animation-duration:${Math.random()*15 + 8}s`,
+        `animation-delay:${Math.random()*10}s`
+      ].join(';');
+      container.appendChild(p);
+    }
+  })();
+
+  // COUNTDOWN
+  (function() {
+    const target = new Date('2026-06-04T08:00:00');
+    function update() {
+      const diff = target - new Date();
+      if (diff <= 0) {
+        ['days','hours','mins','secs'].forEach(id => {
+          document.getElementById('cd-'+id).textContent = '00';
+        });
+        return;
+      }
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor((diff % 86400000) / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
+      document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+      document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
+      document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
+    }
+    update();
+    setInterval(update, 1000);
+  })();
+
+  // CALENDAR — June 2026
+  (function() {
+    const grid = document.getElementById('calendar-grid');
+    const days = ['Su','Mo','Tu','We','Th','Fr','Sa'];
+    days.forEach(d => {
+      const el = document.createElement('div');
+      el.className = 'cal-day-label';
+      el.textContent = d;
+      grid.appendChild(el);
+    });
+    // June 1, 2026 = Monday (day index 1)
+    const startDay = 1;
+    const totalDays = 30;
+    for (let i = 0; i < startDay; i++) {
+      const el = document.createElement('div');
+      el.className = 'cal-cell empty';
+      el.textContent = '';
+      grid.appendChild(el);
+    }
+    for (let d = 1; d <= totalDays; d++) {
+      const el = document.createElement('div');
+      if (d === 4) {
+        el.className = 'cal-cell highlight';
+        el.textContent = '4';
+        el.title = 'Wedding Day!';
+      } else {
+        el.className = 'cal-cell';
+        el.textContent = d;
+      }
+      grid.appendChild(el);
+    }
+  })();
+
+  // SCROLL FADE-IN
+  (function() {
+    const els = document.querySelectorAll('.fade-in');
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(el => io.observe(el));
+    // First element visible immediately
+    if (els[0]) setTimeout(() => els[0].classList.add('visible'), 100);
+  })();
+</script>
+</body>
+</html>
